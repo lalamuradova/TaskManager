@@ -1,0 +1,99 @@
+﻿<Window x:Class="TaskManager.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TaskManager" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="800" Width="1200">
+    <Grid Background="#FFFFFF">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0">
+                <StackPanel Margin="20" Orientation="Horizontal">
+                    <TextBox x:Name="searchtxtbox" Background="#FFF4C4" FontSize="26" Width="500" Height="50"></TextBox>
+                    <Button Width="100" Background="#FEAF00" FontSize="26" FontWeight="SemiBold" Command="{Binding SearchCommand}">Search</Button>
+                </StackPanel>
+               
+                <!--<ScrollViewer VerticalScrollBarVisibility="Visible"  >
+                    
+                    <StackPanel Orientation="Horizontal" Height="470" Width="760">
+                        <ListBox ItemsSource="{Binding Process.Name,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Width="205" ></ListBox>
+                        <ListBox ItemsSource="{Binding Process.HandleCount,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" x:Name="handleCountlstbox" Width="180">
+                            </ListBox>
+                        <ListBox ItemsSource="{Binding Process.ThreadCount,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" x:Name="threadCountlstbox" Width="185">
+                            </ListBox>
+                        <ListBox ItemsSource="{Binding Process.MachineName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" x:Name="machineNamelstbox" Width="190">
+                            </ListBox>
+                    </StackPanel>                    
+                </ScrollViewer>-->
+
+
+
+                <ListView  FontSize="26" Height="450" x:Name="proceslistview"   SelectedItem="{Binding Process}" ItemsSource="{Binding AllProcess}" >
+     
+                    <ListView.View>
+                        <GridView>                           
+                            <GridViewColumn  Header="Name" Width="170">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Padding="5,0" Text="{Binding ProcessName}" ></TextBlock>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Handle Count" Width="200">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Padding="5,0" Text="{Binding HandleCount}"  ></TextBlock>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Thread Count" Width="200">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Padding="5,0" Text="{Binding Threads.Count}"  ></TextBlock>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Machine Name" Width="200">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Padding="5,0" Text="{Binding MachineName}"  ></TextBlock>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                           
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+
+            </StackPanel>
+            <StackPanel Grid.Column="1">
+                <ListBox x:Name="BlackListlstbox" Height="610" Width="380">
+                </ListBox>
+            </StackPanel>
+        </Grid>
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <StackPanel Margin="20" Orientation="Horizontal">
+                <TextBox x:Name="createtxtbox" Background="#CDE8FF" FontSize="26" Width="250" Height="60"></TextBox>
+                <Button Command="{Binding CreateCommand}" Width="100" Height="60" Background="#FEAF00" FontSize="26" FontWeight="SemiBold">Create</Button>
+            </StackPanel>
+            <StackPanel Margin="20" Orientation="Horizontal">
+                <Button Command="{Binding EndTaskCommand}"  Width="150" Height="80" Background="#AFFE00" FontSize="26" FontWeight="SemiBold">END TASK</Button>
+            </StackPanel>
+            <StackPanel  Orientation="Horizontal">
+                <TextBox x:Name="addblacklist" Margin="180,0,0,0" Background="#CDE8FF" FontSize="26" Width="200" Height="60"></TextBox>
+                <Button Command="{Binding AddBlackListCommand}" Margin="30,0,0,0" Width="180" Height="60" Background="#A9AEAC" FontSize="26" FontWeight="SemiBold">Add Black List</Button>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+
+
+</Window>
